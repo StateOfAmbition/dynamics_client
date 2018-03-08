@@ -1,14 +1,14 @@
 module Dynamics
   class Http < ::Api::Client::Base
-    attr_accessor :base_endpoint, :hostname, :client_id, :client_secret, :access_token, :api_version
+    attr_accessor :base_endpoint, :hostname, :tenant_id, :client_id, :client_secret, :access_token, :api_version
 
     def base_endpoint
-      @base_endpoint ||= "#{hostname}/v#{api_version}/#{account}"
+      @base_endpoint ||= "#{hostname}/api/data/v#{api_version}/"
     end
 
     private
       def authorisation_endpoint
-        "https://login.windows.net/#{ENV['DYNAMICS_TENANT_ID']}/oauth2/token"
+        "https://login.windows.net/#{tenant_id}/oauth2/token"
       end
 
       def generate_token
@@ -24,7 +24,7 @@ module Dynamics
       end
 
       def default_config
-        {hostname: Dynamics::Client.hostname, client_id: Dynamics::Client.client_id, client_secret: Dynamics::Client.client_secret, api_version: Dynamics::Client.api_version }
+        {hostname: Dynamics::Client.hostname, tenant_id: Dynamics::Client.tenant_id, client_id: Dynamics::Client.client_id, client_secret: Dynamics::Client.client_secret, api_version: Dynamics::Client.api_version }
       end
   end
 end
