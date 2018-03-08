@@ -25,8 +25,8 @@ module Dynamics
     instance_eval do
       [:get, :post, :patch, :delete].each do |action|
 
-        define_method(action) do |path, params|
-          http.send(path, params)
+        define_method(action) do |path, params = {}|
+          http.send(action, path, params)
         end
       end
     end

@@ -13,15 +13,14 @@ module Dynamics
         end
 
         def generate_token
-          Rails.logger.debug "generating token..."
-          response = request(authorisation_endpoint, {grant_type: 'client_credentials'}.reverse_merge(default_authorisation_params), :post)
+          response = request(authorisation_endpoint, authorisation_params, :post)
           raise "invalid token" unless response.success
           self.access_token_expires_at= Time.at(response.data["expires_on"].to_i)
           response.data["access_token"]
         end
 
-        def authorization_params
-          {client_id: client_id, client_secret: client_secret, resource: hostname}
+        def authorisation_params
+          {grant_type: 'client_credentials', client_id: client_id, client_secret: client_secret, resource: hostname}
         end
 
         def default_config

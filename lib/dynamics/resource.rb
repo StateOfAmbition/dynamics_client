@@ -8,19 +8,19 @@ module Dynamics
       end
 
       def get(params = {})
-        Dynamics::Client::Base.get(endpoint, params)
+        Dynamics::Client.get(endpoint, params)
       end
 
       def create
-        Dynamics::Client::Base.post(endpoint, params)
+        Dynamics::Client.post(endpoint, params)
       end
 
       def update
-        Dynamics::Client::Base.patch(endpoint, params)
+        Dynamics::Client.patch(endpoint, params)
       end
 
       def destroy
-        Dynamics::Client::Base.delete(endpoint)
+        Dynamics::Client.delete(endpoint)
       end
 
       class << self
