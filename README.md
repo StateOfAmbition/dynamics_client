@@ -1,4 +1,4 @@
-# dynamicsClient
+# DynamicsClient
 Short description and motivation.
 
 ## Usage
