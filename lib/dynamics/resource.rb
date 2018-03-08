@@ -52,6 +52,10 @@ module Dynamics
           match ? (match[1] + "ies") : (resource_name + "s")
         end
 
+        def resource_prefix
+          raise "Dynamics::Resource must implement #resource_prefix"
+        end
+
       end
 
       private
@@ -70,10 +74,6 @@ module Dynamics
 
         def attribute_hash
           self.class.attributes.map{|attr| send(attr)}.delete_if { |k, v| v.nil? }
-        end
-
-        def resource_prefix
-          raise "Dynamics::Resource must implement #resource_prefix"
         end
 
     end
