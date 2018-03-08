@@ -11,11 +11,11 @@ module Dynamics
   module Client
 
     def self.http
-      @http ||= Dynamics::Http.new
+      @http ||= Dynamics::Client::Http.new
     end
 
     def self.config
-      @@config ||= Dynamics::Configuration.new
+      @@config ||= Dynamics::Client::Configuration.new
     end
 
     def self.setup
