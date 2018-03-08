@@ -8,7 +8,7 @@ module Dynamics
       end
 
       def get(params = {})
-        Dynamics::Base.get(endpoint, arams)
+        Dynamics::Base.get(endpoint, params)
       end
 
       def create
@@ -27,7 +27,17 @@ module Dynamics
         def attributes
           raise "Dynamics::Resource must implement self.attributes"
         end
+
+        def all(params = {})
+          Dynamics::Base.get(resource_type, params)
+        end
+
+        def find(id)
+          Dynamics::Base.get("#{resource_type}(#{id})", params)
+        end
+
       end
+
       private
 
         def endpoint
