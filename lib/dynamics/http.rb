@@ -5,8 +5,7 @@ module Dynamics
 
       def parse(status, body)
         begin
-          document = JSON.parse(body)
-          ::Api::Client::Response.new(status, document).tap do |r|
+          ::Api::Client::Response.new(status, JSON.parse(body)).tap do |r|
             puts "[API::Client] Response: status #{r.status} data: #{r.data.inspect}" if log_response?
           end
         rescue JSON::ParserError => e
@@ -26,6 +25,7 @@ module Dynamics
         def generate_token
           response = request(authorisation_endpoint, authorisation_params, :post)
           raise "invalid token" unless response.success
+          self.access_token= response.data["access_token"]
           self.access_token_expires_at= Time.at(response.data["expires_on"].to_i)
           response.data["access_token"]
         end
