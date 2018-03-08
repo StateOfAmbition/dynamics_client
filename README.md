@@ -1,4 +1,4 @@
-# DynamicsClient
+# Dynamics::Client
 Short description and motivation.
 
 ## Usage

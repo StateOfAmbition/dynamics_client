@@ -1,4 +1,4 @@
-module Dynamics
+module Dynamics::Client
   class Base
     attr_accessor :client, :attributes, :params
 

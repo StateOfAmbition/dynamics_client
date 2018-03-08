@@ -1,5 +1,5 @@
-module Dynamics
-  class Resource < Dynamics::Base
+module Dynamics::Client
+  class Resource < Dynamics::Client::Base
 
     def sync
       response = persisted? ? update : create
