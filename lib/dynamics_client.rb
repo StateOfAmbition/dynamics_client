@@ -1,9 +1,9 @@
 require "api_client"
-require 'dynamics_client/http'
+require 'dynamics/http'
 
-require_relative './dynamics_client/configuration.rb'
-require_relative './dynamics_client/base.rb'
-require_relative './dynamics_client/resource.rb'
+require_relative './dynamics/configuration.rb'
+require_relative './dynamics/base.rb'
+require_relative './dynamics/resource.rb'
 
 
 

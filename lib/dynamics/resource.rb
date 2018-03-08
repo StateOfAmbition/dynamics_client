@@ -30,7 +30,7 @@ module Dynamics::Client
     private
 
       def endpoint
-        persisted? "#{self.class.resource_name}(#{id})" : self.class.resource_name
+        persisted? ? "#{self.class.resource_name}(#{id})" : self.class.resource_name
       end
 
       def persisted?
