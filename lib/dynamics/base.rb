@@ -22,23 +22,6 @@ module Dynamics::Client
         @client ||= Dynamics::Client.http
       end
 
-      def resource_prefix
-        nil
-      end
-
-      def resource_name
-        @resouce_name ||= self.name.split('::').last.
-        gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2').
-        gsub(/([a-z\d])([A-Z])/,'\1_\2').
-        tr("-", "_").
-        downcase
-      end
-
-      def resource_type
-        match = /^(\w+)(?:y)$/i.match(resource_name)
-        match ? (match[1] + "ies") : (resource_name + "s")
-      end
-
     end
 
   end
