@@ -8,19 +8,19 @@ module Dynamics
       end
 
       def get(params = {})
-        Dynamics::Base.get(endpoint, params)
+        Dynamics::Client::Base.get(endpoint, params)
       end
 
       def create
-        Dynamics::Base.post(endpoint, params)
+        Dynamics::Client::Base.post(endpoint, params)
       end
 
       def update
-        Dynamics::Base.patch(endpoint, params)
+        Dynamics::Client::Base.patch(endpoint, params)
       end
 
       def destroy
-        Dynamics::Base.delete(endpoint)
+        Dynamics::Client::Base.delete(endpoint)
       end
 
       class << self
@@ -29,11 +29,11 @@ module Dynamics
         end
 
         def all(params = {})
-          Dynamics::Base.get(resource_type, params)
+          Dynamics::Client::Base.get(resource_type, params)
         end
 
         def find(id)
-          Dynamics::Base.get("#{resource_type}(#{id})", params)
+          Dynamics::Client::Base.get("#{resource_type}(#{id})", params)
         end
 
       end
