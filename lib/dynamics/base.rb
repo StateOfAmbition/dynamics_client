@@ -8,6 +8,7 @@ module Dynamics
       end
 
       def method_missing(method, *args, &block)
+        return super if attributes.nil?
         attributes.has_key?(method) ? attributes[method] : nil
       end
 
