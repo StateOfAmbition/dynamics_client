@@ -5,7 +5,8 @@ module Dynamics
 
       def parse(status, body)
         begin
-          ::Api::Client::Response.new(status, JSON.parse(body)).tap do |r|
+          data = body.has_key?(:value) ? body["value"] : body
+          ::Api::Client::Response.new(status, data).tap do |r|
             puts "[API::Client] Response: status #{r.status} data: #{r.data.inspect}" if log_response?
           end
         rescue JSON::ParserError => e
