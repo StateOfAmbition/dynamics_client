@@ -11,7 +11,7 @@ module Dynamics
             puts "[API::Client] Response: status #{r.status} data: #{r.data.inspect}" if log_response?
           end
         rescue JSON::ParserError => e
-          ::Api::Client::Response.new(response.code, response.headers, body)
+          ::Api::Client::Response.new(response.code, response.headers, response.body)
         end
       end
 

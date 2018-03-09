@@ -1,14 +1,14 @@
 GIT
   remote: git@github.com:StateOfAmbition/api_client.git
-  revision: 15f5ce0c67f19efeafabf126352adb7e2e7b4846
+  revision: 23c6527e464bab18072dbb6b98e9b41c2d9ac3d7
   specs:
-    api_client (0.2.1)
+    api_client (0.2.2)
       rest-client (~> 2.0.2)
 
 PATH
   remote: .
   specs:
-    dynamics_client (0.0.1)
+    dynamics_client (0.0.6)
 
 GEM
   remote: https://rubygems.org/
