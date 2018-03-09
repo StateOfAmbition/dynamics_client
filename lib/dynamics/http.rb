@@ -6,7 +6,7 @@ module Dynamics
       def parse(status, body)
         begin
           document = JSON.parse(body)
-          data = document.has_key?(:value) ? document["value"] : document
+          data = document.has_key?("value") ? document["value"] : document
           ::Api::Client::Response.new(status, data).tap do |r|
             puts "[API::Client] Response: status #{r.status} data: #{r.data.inspect}" if log_response?
           end
