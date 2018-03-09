@@ -20,6 +20,11 @@ module Dynamics
       end
 
       private
+
+        def content_type
+          "application/json"
+        end
+
         def authorisation_endpoint
           "https://login.windows.net/#{tenant_id}/oauth2/token"
         end
