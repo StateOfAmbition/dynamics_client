@@ -3,15 +3,15 @@ module Dynamics
     class Http < ::Api::Client::Base
       attr_accessor :base_endpoint, :hostname, :tenant_id, :client_id, :client_secret, :access_token, :api_version
 
-      def parse(status, body)
+      def parse(response)
         begin
-          document = JSON.parse(body)
+          document = JSON.parse(response.body)
           data = document.has_key?("value") ? document["value"] : document
-          ::Api::Client::Response.new(status, data).tap do |r|
+          ::Api::Client::Response.new(response.status, response.headers, data).tap do |r|
             puts "[API::Client] Response: status #{r.status} data: #{r.data.inspect}" if log_response?
           end
         rescue JSON::ParserError => e
-          ::Api::Client::Response.new(status, body)
+          ::Api::Client::Response.new(response.status, body)
         end
       end
 
