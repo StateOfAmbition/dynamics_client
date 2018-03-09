@@ -5,9 +5,11 @@ module Dynamics
 
       def parse(status, body)
         begin
-          data = body.has_key?(:value) ? body["value"] : body
-          ::Api::Client::Response.new(status, data).tap do |r|
-            puts "[API::Client] Response: status #{r.status} data: #{r.data.inspect}" if log_response?
+          JSON.parse(body).tap do |document|
+            data = JSON.parse(document).has_key?(:value) ? document["value"] : document
+            ::Api::Client::Response.new(status, data).tap do |r|
+              puts "[API::Client] Response: status #{r.status} data: #{r.data.inspect}" if log_response?
+            end
           end
         rescue JSON::ParserError => e
           ::Api::Client::Response.new(status, body)
