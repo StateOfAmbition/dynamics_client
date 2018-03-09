@@ -69,7 +69,7 @@ module Dynamics
       private
 
         def generate_params
-          params_hash
+          params_hash.to_json
         end
 
         def params_hash
