@@ -21,6 +21,10 @@ module Dynamics
 
       private
 
+        def header_params
+          {content_type:  content_type, authorization: "Bearer #{access_token}"}
+        end
+
         def content_type
           "application/json"
         end
