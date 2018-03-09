@@ -23,6 +23,14 @@ module Dynamics
         self.client.delete(endpoint)
       end
 
+      def endpoint
+        persisted? ? "#{self.class.resource_type}(#{id})" : self.class.resource_type
+      end
+
+      def persisted?
+        !!(id)
+      end
+
       class << self
         def attributes
           raise "Dynamics::Resource must implement self.attributes"
@@ -59,14 +67,6 @@ module Dynamics
       end
 
       private
-
-        def endpoint
-          persisted? ? "#{self.class.resource_type}(#{id})" : self.class.resource_type
-        end
-
-        def persisted?
-          !!(id)
-        end
 
         def generate_params
           attribute_hash
