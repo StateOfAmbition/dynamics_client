@@ -7,20 +7,20 @@ module Dynamics
         block_given? ? (yield response) : response
       end
 
-      def get(params = {})
-        self.client.get(endpoint, params)
+      def get(url_params = {})
+        self.class.client.get(endpoint, url_params)
       end
 
       def create
-        self.client.post(endpoint, params)
+        self.class.client.post(endpoint, params)
       end
 
       def update
-        self.client.patch(endpoint, params)
+        self.class.client.patch(endpoint, params)
       end
 
       def destroy
-        self.client.delete(endpoint)
+        self.class.client.delete(endpoint)
       end
 
       def endpoint
@@ -69,11 +69,11 @@ module Dynamics
       private
 
         def generate_params
-          attribute_hash
+          params_hash
         end
 
-        def attribute_hash
-          self.class.attributes.map{|attr| send(attr)}.delete_if { |k, v| v.nil? }
+        def params_hash
+          self.class.attributes.inject({}){|params, attr| params[attr] = send(attr); params}.delete_if { |k, v| v.nil? }
         end
 
     end
