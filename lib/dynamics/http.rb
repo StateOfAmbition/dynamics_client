@@ -8,9 +8,10 @@ module Dynamics
           document = JSON.parse(response.body)
           data = document.has_key?("value") ? document["value"] : document
           Response.new(response.code, response.headers, data).tap do |r|
-            puts "[API::Client] Response: status #{r.status} data: #{r.data.inspect}" if log_response?
+            puts "[Dynamics::Client] Response: status #{r.status} data: #{r.data.inspect}" if log_response?
           end
         rescue JSON::ParserError => e
+          Rails.logger.debug "[Dynamics::Client] response: #{response.inspect}"
           Response.new(response.code, response.headers, response.body)
         end
       end
