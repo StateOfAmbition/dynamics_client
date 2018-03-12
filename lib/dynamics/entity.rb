@@ -1,6 +1,6 @@
 module Dynamics
   module Client
-    class Resource < Dynamics::Client::Base
+    class Entity < Dynamics::Client::Base
 
       def sync
         response = persisted? ? update : create
