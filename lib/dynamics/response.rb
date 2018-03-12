@@ -7,21 +7,22 @@ module Dynamics
       end
 
       def resource
+        return nil if data.blank?
         @resource ||= data.is_a?(Array) ? resources.first : OpenStruct.new(data)
       end
 
       def resource_id(field)
-        resource.send(field) || extract_id_from_headers
+        resource&.send(field) || extract_id_from_headers
       end
 
       private
 
         def extract_id_from_headers
-          headers.has_key?(:entity_id) ? entity_id_regex : nil
+          headers.has_key?(:odata_entityid) ? entity_id_regex : nil
         end
 
         def entity_id_regex
-          headers[:entity_id] =~ /\((.*)\)\z/
+          headers[:odata_entityid] =~ /\((.*)\)\z/
           $1
         end
     end
