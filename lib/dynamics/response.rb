@@ -24,7 +24,8 @@ module Dynamics
           headers[:entity_id] =~ /\((.*)\)\z/
           $1
         end
-
-
     end
+
+
   end
+end
