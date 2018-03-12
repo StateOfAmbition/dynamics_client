@@ -3,8 +3,7 @@ require 'dynamics/http'
 
 require_relative './dynamics/configuration.rb'
 require_relative './dynamics/base.rb'
-require_relative './dynamics/resource.rb'
-require_relative './dynamics/response_resource.rb'
+require_relative './dynamics/entity.rb'
 require_relative './dynamics/response.rb'
 
 
