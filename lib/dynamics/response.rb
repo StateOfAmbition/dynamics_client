@@ -11,7 +11,7 @@ module Dynamics
       end
 
       def resource_id(field)
-        resource.id(field) || extract_id_from_headers
+        resource.send(field) || extract_id_from_headers
       end
 
       private
