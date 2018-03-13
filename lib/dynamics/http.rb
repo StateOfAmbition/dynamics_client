@@ -4,19 +4,16 @@ module Dynamics
       attr_accessor :base_endpoint, :hostname, :tenant_id, :client_id, :client_secret, :access_token, :api_version
 
       def parse(response)
-        Dynamics::Client.logger.info "[Dynamics::Client] response: #{response.inspect}"
-        Dynamics::Client.logger.info "[Dynamics::Client] headers: #{response.headers.inspect}"
         begin
           document = JSON.parse(response.body)
           data = document.has_key?("value") ? document["value"] : document
-          Dynamics::Client.logger.info "[Dynamics::Client#parse] standard response headers: #{response.headers.inspect}" if log_response?
           Response.new(response.code, response.headers, data).tap do |r|
-            Dynamics::Client.logger.info "[Dynamics::Client] response: status #{r.status} data: #{r.data.inspect}" if log_response?
+            Dynamics::Client.logger.info "[Dynamics::Client] response: status #{r.status} headers: #{r.headers.inspect} data: #{r.data.inspect}" if log_response?
           end
         rescue JSON::ParserError => e
-          Dynamics::Client.logger.info "[Dynamics::Client#parse] error response headers: #{response.headers.inspect}" if log_response?
-          Dynamics::Client.logger.info ::Api::Client::Response.new(response.code, response.headers, response.body).inspect
-          Response.new(response.code, response.headers, response.body)
+          Response.new(response.code, response.headers, response.body) do |r|
+            Dynamics::Client.logger.info "[Dynamics::Client] response: status #{r.status} headers: #{r.headers.inspect} data: #{r.data.inspect}" if log_response?
+          end
         end
       end
 
