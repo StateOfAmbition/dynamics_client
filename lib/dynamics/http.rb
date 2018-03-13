@@ -9,11 +9,13 @@ module Dynamics
         begin
           document = JSON.parse(response.body)
           data = document.has_key?("value") ? document["value"] : document
+          Dynamics::Client.logger.info "[Dynamics::Client#parse] standard response headers: #{response.headers.inspect}" if log_response?
           Response.new(response.code, response.headers, data).tap do |r|
             Dynamics::Client.logger.info "[Dynamics::Client] response: status #{r.status} data: #{r.data.inspect}" if log_response?
           end
         rescue JSON::ParserError => e
-          Dynamics::Client.logger.debug "[Dynamics::Client] response headers: #{response.headers.inspect}" if log_response?
+          Dynamics::Client.logger.info "[Dynamics::Client#parse] error response headers: #{response.headers.inspect}" if log_response?
+          Dynamics::Client.logger.info ::Api::Client::Response.new(response.code, response.headers, response.body).inspect
           Response.new(response.code, response.headers, response.body)
         end
       end
