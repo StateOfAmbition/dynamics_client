@@ -4,6 +4,8 @@ module Dynamics
       attr_accessor :base_endpoint, :hostname, :tenant_id, :client_id, :client_secret, :access_token, :api_version
 
       def parse(response)
+        Dynamics::Client.logger.info "[Dynamics::Client] response: #{response.inspect}"
+        Dynamics::Client.logger.info "[Dynamics::Client] headers: #{response.headers.inspect}"
         begin
           document = JSON.parse(response.body)
           data = document.has_key?("value") ? document["value"] : document
