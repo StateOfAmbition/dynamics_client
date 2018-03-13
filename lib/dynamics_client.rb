@@ -13,6 +13,12 @@ module Dynamics
 
     def self.http
       @http ||= Dynamics::Client::Http.new
+      @http.hostname = "https://ncvosandbox.crm4.dynamics.com"
+      @http.tenant_id = "67e7e0c8-1ed0-45d1-b0cc-cabb5020e034"
+      @http.client_id = "9903d040-e73f-4f18-98b4-92fccfda8920"
+      @http.client_secret = "fnxY++URXF6kkoapgr2iVw91qZwv5yEeMaz8xMgbB/0="
+      @http.api_version = "8.2"
+      @http
     end
 
     def self.config
