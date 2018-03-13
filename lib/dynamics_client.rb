@@ -23,6 +23,12 @@ module Dynamics
       yield config
     end
 
+    def self.logger
+      @logger ||= logger = Logger.new(STDOUT).tap do |l|
+        l.level = Logger::INFO
+      end
+    end
+
     instance_eval do
       [:get, :post, :patch, :delete].each do |action|
 
