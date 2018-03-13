@@ -11,13 +11,17 @@ module Dynamics
             Dynamics::Client.logger.info "Dynamics::Client", "response: status #{r.status} data: #{r.data.inspect}" if log_response?
           end
         rescue JSON::ParserError => e
-          Dynamics::Client.logger.debug "Dynamics::Client", "response headers: #{response.headers.inspect}"
+          Dynamics::Client.logger.debug "Dynamics::Client", "response headers: #{response.headers.inspect}" if log_response?
           Response.new(response.code, response.headers, response.body)
         end
       end
 
       def base_endpoint
         @base_endpoint ||= "#{hostname}/api/data/v#{api_version}/"
+      end
+
+      def log_response?
+        Dynamics::Client.config.logger_active
       end
 
       private
