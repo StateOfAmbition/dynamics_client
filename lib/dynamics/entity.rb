@@ -1,6 +1,7 @@
 module Dynamics
   module Client
     class Entity < Dynamics::Client::Base
+      attr_accessor :attributes, :lookups, :params
 
       def sync
         response = persisted? ? update : create
@@ -73,7 +74,19 @@ module Dynamics
         end
 
         def params_hash
-          self.class.attributes.inject({}){|params, attr| params[attr] = send(attr); params}.delete_if { |k, v| v.nil? }
+          non_empty_attributes + non_empty_lookups
+        end
+
+        def non_empty_params(type)
+          self.class.send(type).inject({}){|params, attr| params[attr] = send(attr); params}.delete_if { |k, v| v.nil? }
+        end
+
+        def non_empty_attributes
+          non_empty_params(:attributes)
+        end
+
+        def non_empty_lookups
+          non_empty_params(:lookups)
         end
 
     end

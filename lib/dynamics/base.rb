@@ -1,7 +1,7 @@
 module Dynamics
   module Client
     class Base
-      attr_accessor :client, :attributes, :params
+      attr_accessor :client
 
       def initialize(attributes = {})
         @attributes = attributes
