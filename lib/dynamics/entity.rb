@@ -57,7 +57,7 @@ module Dynamics
 
         def resource_plural
           match = /^(\w+)(?:y)$/i.match(resource_name)
-          match ? (match[1] + "ies") : (resource_name + "s")
+          match ? "ies" : "s"
         end
 
         def resource_prefix
