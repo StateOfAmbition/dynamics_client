@@ -1,7 +1,6 @@
 module Dynamics
   module Client
     class Entity < Dynamics::Client::Base
-      attr_accessor :attributes, :lookups, :params
 
       def sync
         response = persisted? ? update : create

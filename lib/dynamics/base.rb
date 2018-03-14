@@ -1,15 +1,17 @@
 module Dynamics
   module Client
     class Base
-      attr_accessor :client
+      attr_accessor :client, :attributes, :lookups, :params
 
-      def initialize(attributes = {})
+      def initialize(attributes = {}, lookups = {})
         @attributes = attributes
+        @lookups = lookups
       end
 
       def method_missing(method, *args, &block)
-        return super if attributes.nil?
-        attributes.has_key?(method) ? attributes[method] : nil
+        value = !attributes.nil? && attributes.has_key?(method) ? attributes[method] : nil
+        value = value.nil? && !lookups.empty? && lookups.has_key?("#{method}@odata.bind") ? lookups["#{method}@odata.bind"] : nil
+        value || super
       end
 
       def params
