@@ -49,10 +49,7 @@ module Dynamics
         end
 
         def resource_name
-          @resouce_name ||= "#{resource_prefix}_#{self.name.split('::').last.
-          gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2').
-          gsub(/([a-z\d])([A-Z])/,'\1_\2').
-          tr("-", "_").downcase}"
+          @resouce_name ||= "#{resource_prefix}_#{self.name.split('::').last.downcase
         end
 
         def resource_type
