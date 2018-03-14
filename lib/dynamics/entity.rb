@@ -37,6 +37,10 @@ module Dynamics
           raise "Dynamics::Resource must implement self.attributes"
         end
 
+        def lookups
+          {}
+        end
+
         def all(params = {})
           client.get(resource_type, params)
         end
