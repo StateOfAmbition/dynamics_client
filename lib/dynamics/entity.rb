@@ -78,7 +78,7 @@ module Dynamics
         end
 
         def params_hash
-          non_empty_attributes + non_empty_lookups
+          non_empty_attributes.merge(non_empty_lookups)
         end
 
         def non_empty_params(type)
