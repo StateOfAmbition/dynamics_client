@@ -81,7 +81,7 @@ module Dynamics
         end
 
         def non_empty_params(type)
-          self.class.send(type).inject({}){|params, attr| params[attr] = send(attr); params}.delete_if { |k, v| v.nil? }
+          self.send(type).inject({}){|params, attr| params[attr] = send(attr); params}.delete_if { |k, v| v.nil? }
         end
 
         def non_empty_attributes
