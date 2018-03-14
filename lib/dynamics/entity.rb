@@ -49,7 +49,7 @@ module Dynamics
         end
 
         def resource_name
-          @resouce_name ||= "#{resource_prefix}_#{self.name.split('::').last.downcase
+          @resouce_name ||= "#{resource_prefix}_#{self.name.split('::').last.downcase}"
         end
 
         def resource_type
