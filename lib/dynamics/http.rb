@@ -18,7 +18,7 @@ module Dynamics
       end
 
       def base_endpoint
-        @base_endpoint ||= "#{hostname}/api/data/v#{api_version}/"
+        @base_endpoint ||= "#{hostname}/api/data/v#{api_version}"
       end
 
       def log_response?
