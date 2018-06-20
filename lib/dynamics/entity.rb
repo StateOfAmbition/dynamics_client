@@ -24,7 +24,7 @@ module Dynamics
       end
 
       def endpoint
-        persisted? ? "#{self.class.resource_type}(#{id})" : self.class.resource_type
+        persisted? ? "#{self.class.endpoint}(#{id})" : self.class.endpoint
       end
 
       def persisted?
@@ -36,6 +36,10 @@ module Dynamics
           raise "Dynamics::Resource must implement self.attributes"
         end
 
+        def endpoint
+          resource_type
+        end
+
         def lookups
           {}
         end
@@ -44,8 +48,12 @@ module Dynamics
           client.get(resource_type, params)
         end
 
-        def find(id)
-          client.get("#{resource_type}(#{id})", params)
+        def find(id, params = {})
+          client.get("#{endpoint}(#{id})", params)
+        end
+
+        def destroy(id)
+          client.delete("#{endpoint}(#{id})")
         end
 
         def resource_name
