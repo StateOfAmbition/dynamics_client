@@ -41,7 +41,7 @@ module Dynamics
 
         def generate_token
           response = request(authorisation_endpoint, authorisation_params, :post)
-          raise "invalid token" unless response.success
+          raise "[Dynamics::Client::Http] Gerate token: invalid token" unless response.success
           self.access_token= response.data["access_token"]
           self.access_token_expires_at= Time.at(response.data["expires_on"].to_i)
           response.data["access_token"]
